@@ -1,50 +1,51 @@
-const path = require('path')
-const HTMLWebpackPlugin = require('html-webpack-plugin')
+const path = require('path');
+const HTMLWebpackPlugin = require('html-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-/** @type {import('webpack').Configuration} */
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/index.tsx',
+  devtool: 'inline-source-map',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'app.[contenthash].js'
+    filename: '[name].[contenthash].js',
   },
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.tsx', '.ts'],
   },
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env', '@babel/preset-react']
-          }
-        }
+        loader: 'ts-loader',
+        options: {
+          transpileOnly: true,
+        },
       },
       {
         test: /\.html$/,
         use: {
-          loader: 'html-loader'
-        }
+          loader: 'html-loader',
+        },
       },
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader']
-      }
-    ]
+        use: ['style-loader', 'css-loader'],
+      },
+    ],
   },
   plugins: [
+    new ForkTsCheckerWebpackPlugin(),
     new HTMLWebpackPlugin({
       template: './public/index.html',
-      filename: './index.html'
-    })
+    }),
+    new CleanWebpackPlugin(),
   ],
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
     port: 3000,
-    open: true
-  }
-}
+    open: true,
+  },
+};
