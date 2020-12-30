@@ -18,10 +18,7 @@ module.exports = {
       {
         test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
-        loader: 'ts-loader',
-        options: {
-          transpileOnly: true,
-        },
+        loader: 'babel-loader',
       },
       {
         test: /\.html$/,
@@ -43,16 +40,32 @@ module.exports = {
     ],
   },
   plugins: [
-    new ForkTsCheckerWebpackPlugin(),
+    new ForkTsCheckerWebpackPlugin({
+      typescript: {
+        diagnosticOptions: {
+          semantic: true,
+          syntactic: true,
+        },
+        mode: 'write-references',
+      },
+    }),
     new HTMLWebpackPlugin({
       template: './public/index.html',
     }),
     new CleanWebpackPlugin(),
   ],
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
+  },
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
     port: 3000,
     open: true,
+    historyApiFallback: {
+      disableDotRule: true,
+    },
   },
 };

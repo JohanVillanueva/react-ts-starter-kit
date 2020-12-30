@@ -14,15 +14,14 @@ module.exports = {
     },
   },
   extends: [
+    'eslint:recommended',
     'plugin:react/recommended',
-    'plugin:@typescript-eslint/recommended',
-    'prettier/@typescript-eslint',
     'plugin:prettier/recommended',
+    'plugin:@typescript-eslint/recommended',
     'plugin:react-hooks/recommended',
-    'airbnb',
-    'airbnb/hooks',
     'plugin:import/typescript',
     'plugin:jsx-a11y/recommended',
+    'prettier/@typescript-eslint',
   ],
   plugins: ['react', '@typescript-eslint', 'prettier', 'jsx-a11y', 'import'],
   rules: {
@@ -40,6 +39,7 @@ module.exports = {
     '@typescript-eslint/no-use-before-define': 'off',
     'import/extensions': 'off',
     '@typescript-eslint/no-var-requires': 0,
+    'import/prefer-default-export': 'off',
   },
   env: {
     browser: true,
