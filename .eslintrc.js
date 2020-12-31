@@ -32,6 +32,14 @@ module.exports = {
         endOfLine: 'auto',
       },
     ],
+    'react/self-closing-comp': [
+      'error',
+      {
+        component: true,
+        html: true,
+      },
+    ],
+    'react/jsx-boolean-value': 1,
     'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
     'no-use-before-define': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 0,
