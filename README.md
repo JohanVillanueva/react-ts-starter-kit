@@ -11,6 +11,10 @@
 - 📃 Linting with [ESLint](https://eslint.org/) + [Airbnb JS Style Guide](https://github.com/airbnb/javascript)
 - 🐩 Pre commit hooks with [Husky](https://github.com/typicode/husky) (Run linter before commit)
 
+#00171f
+#003459
+#007ea7
+#00A8E8
 ## NPM scripts 🔧
 
 | Script             | Description                                      |
